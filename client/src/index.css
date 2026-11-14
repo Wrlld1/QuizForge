@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Скрыть скроллбар */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Page transition */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Countdown overlay */
+@keyframes countdown {
+  0% { opacity: 0; transform: scale(2); }
+  30% { opacity: 1; transform: scale(1); }
+  80% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+.animate-countdown {
+  animation: countdown 0.9s ease-out;
+}
+
+/* Modal appear */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-modalIn {
+  animation: modalIn 0.2s ease-out;
+}
+
+/* Toast slide in */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Confetti particle */
+@keyframes confettiUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.5);
+  }
+}
+.animate-confetti {
+  animation: confettiUp 0.8s ease-out forwards;
+}
+
+/* Shake for wrong answer */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+.animate-shake {
+  animation: shake 0.4s ease-out;
+}
+
+/* Splash screen */
+@keyframes letterReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-letterReveal {
+  animation: letterReveal 0.5s ease-out;
+}
+
+@keyframes lineLoad {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.animate-lineLoad {
+  animation: lineLoad 2s ease-in-out forwards;
+}
+
+@keyframes splashFadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.05); }
+}
+.animate-splashFadeOut {
+  animation: splashFadeOut 0.5s ease-in forwards;
+}
+
+/* Confetti */
+@keyframes confettiFall {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(var(--confetti-y)) translateX(var(--confetti-x)) rotate(var(--confetti-r)); opacity: 0; }
+}
+.animate-confettiFall {
+  animation: confettiFall 2s ease-out forwards;
+}
+
+/* XP bar fill animation */
+@keyframes xpFill {
+  from { width: var(--xp-from, 0%); }
+  to { width: var(--xp-to, 0%); }
+}
+.animate-xpFill {
+  animation: xpFill 1s ease-out forwards;
+}
+
+/* Level-up glow pulse */
+@keyframes levelGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(168, 85, 247, 0.4); }
+  50% { box-shadow: 0 0 24px rgba(168, 85, 247, 0.8), 0 0 48px rgba(168, 85, 247, 0.3); }
+}
+.animate-levelGlow {
+  animation: levelGlow 1.5s ease-in-out 3;
+}
+
+/* Level-up text */
+@keyframes levelUp {
+  0% { opacity: 0; transform: scale(0.5) translateY(10px); }
+  50% { opacity: 1; transform: scale(1.15) translateY(-5px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-levelUp {
+  animation: levelUp 0.6s ease-out;
+}
+
+/* Question slide transition */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slideInRight {
+  animation: slideInRight 0.4s ease-out;
+}
+
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-40px); }
+}
+.animate-slideOutLeft {
+  animation: slideOutLeft 0.3s ease-in forwards;
+}
+
+/* Ripple effect */
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/* Achievement toast with icon bounce */
+@keyframes achievementBounce {
+  0% { transform: scale(0) rotate(-15deg); }
+  50% { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.animate-achievementBounce {
+  animation: achievementBounce 0.5s ease-out;
+}
+
+/* Tooltip */
+.tooltip-container {
+  position: relative;
+}
+.tooltip-container .tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1f1f1f;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 50;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+.tooltip-container .tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1f1f1f;
+}
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Parallax card hover */
+.parallax-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}

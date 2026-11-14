@@ -1,0 +1,39 @@
+# Зависимости (самое важное, чтобы не грузить тысячи файлов)
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Собранные бандлы
+dist/
+build/
+client/dist/
+server/dist/
+
+# Секретные ключи и локальные настройки
+.env
+.env.local
+.env.*.local
+client/.env
+server/.env
+
+# Логи и кэш
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vite/
+
+# Системные файлы и настройки редактора
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Сборки и установщики
+release/
+dist/
+build/
+out/
+client/release/
+client/dist/
+client/release/
+release/

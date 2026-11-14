@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  role      String   @default("USER")
+  avatar      String?
+  avatarIcon  String   @default("User")
+  avatarColor String   @default("#a855f7")
+  avatarImage String?
+  bannerColor String   @default("#000000")
+  bio         String?
+  title       String   @default("Новичок")
+  rating      Int      @default(1000)
+  level     Int      @default(1)
+  xp        Int      @default(0)
+  xpToNext  Int      @default(100)
+  skillLevel Float   @default(0.5)
+  score     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessions         GameSession[]
+  userAchievements UserAchievement[]
+  dailyProgress    UserDailyProgress[]
+}
+
+model Question {
+  id           Int      @id @default(autoincrement())
+  text         String
+  options      String
+  answer       Int
+  category     String
+  difficulty   String   @default("medium")
+  codeSnippet  String?
+  codeLanguage String?
+  createdAt    DateTime @default(now())
+}
+
+model GameSession {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  mode          String
+  category      String
+  difficulty    String   @default("medium")
+  score         Int      @default(0)
+  totalQuestions Int     @default(0)
+  correctCount  Int      @default(0)
+  timeTaken     Int      @default(0)
+  streak        Int      @default(0)
+  xpEarned      Int      @default(0)
+  isBattle      Boolean  @default(false)
+  isWin         Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique
+  name        String
+  description String
+  icon        String
+  xpReward    Int      @default(50)
+  createdAt   DateTime @default(now())
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  achievementId Int
+  unlockedAt    DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@unique([userId, achievementId])
+}
+
+model DailyChallenge {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  type        String   // PLAY_GAMES, SCORE_POINTS, CORRECT_ANSWERS, WIN_BATTLE, PLAY_CATEGORY, STREAK
+  target      Int
+  xpReward    Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  progress UserDailyProgress[]
+}
+
+model UserDailyProgress {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  challengeId Int
+  date        String   // "2026-03-22"
+  progress    Int      @default(0)
+  completed   Boolean  @default(false)
+  claimed     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user      User           @relation(fields: [userId], references: [id])
+  challenge DailyChallenge @relation(fields: [challengeId], references: [id])
+
+  @@unique([userId, challengeId, date])
+}
